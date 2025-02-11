@@ -2,10 +2,10 @@ import si from "systeminformation";
 import reports from "./models/report.js";
 import "dotenv/config";
 
-async function getSystemStats() {
+export default async function getSystemStats() {
   // Obter informações de memória
   const mem = await si.mem();
-  const usedMemory = ((mem.used / 1024 / 1024)).toFixed(2); // em MB
+  const usedMemory = (mem.used / 1024 / 1024).toFixed(2); // em MB
   const usedMemoryPercent = ((mem.used / mem.total) * 100).toFixed(2);
 
   // Obter informações de CPU
@@ -14,11 +14,12 @@ async function getSystemStats() {
 
   // Obter informações de data e hora
   const date = new Date();
-  const dataHoraParcial = `${date.getFullYear()}-${
-    date.getMonth() + 1
-  }-${date.getDate()} ${
-    date.getHours()
-  }:${date.getMinutes()}:${date.getSeconds()}`;
+  const dataString = date
+    .toLocaleString("pt-BR")
+    .replaceAll("/", "-")
+    .replaceAll(",", "");
+  const [dia, mes, ano, hora] = dataString.split(/[- ]/);
+  const dataHoraParcial = `${ano}-${mes}-${dia} ${hora}`;
 
   reports
     .create({
@@ -35,5 +36,3 @@ async function getSystemStats() {
       console.error("Erro ao enviar informações do sistema:", error);
     });
 }
-
-export default getSystemStats;
