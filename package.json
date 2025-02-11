@@ -1,0 +1,19 @@
+{
+  "name": "verificaperformance",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "sequelize": "^6.37.5",
+    "systeminformation": "^5.25.11",
+    "tedious": "^18.6.1"
+  }
+}
