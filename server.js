@@ -17,13 +17,21 @@ function scheduleNextHour(callback) {
   }, delay);
 }
 
-scheduleNextHour(() => {
-  console.log("Iniciando execução...");
-  getSystemStats()
+// scheduleNextHour(() => {
+//   console.log("Iniciando execução...");
+//   getSystemStats()
+//     .then(() => {
+//       console.log("Execução concluida com sucesso!");
+//     })
+//     .catch((error) => {
+//       console.error("Erro ao executar o script:", error);
+//     });
+// });
+
+getSystemStats()
     .then(() => {
       console.log("Execução concluida com sucesso!");
     })
     .catch((error) => {
       console.error("Erro ao executar o script:", error);
     });
-});
