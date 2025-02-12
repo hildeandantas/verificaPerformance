@@ -1,24 +1,24 @@
 import getSystemStats from "./index.js";
 
-function getNextHour() {
-  const now = new Date();
-  now.setMinutes(0, 0, 0);
-  now.setHours(now.getHours() + 1);
-  return now;
-}
+function executarNaHoraRedonda(funcao) {
+  function calcularTempoAteProximaHora() {
+    const agora = new Date();
+    const minutos = agora.getMinutes();
+    const segundos = agora.getSeconds();
+    const milissegundos = agora.getMilliseconds();
+    const tempoAteProximaHora =
+      (60 - minutos) * 60 * 1000 - segundos * 1000 - milissegundos;
+    return tempoAteProximaHora;
+  }
 
-function scheduleNextHour(callback) {
-  const nextHour = getNextHour();
-  const delay = nextHour - new Date();
-  console.log(`Proxima execução em ${(delay / 1000 / 60).toFixed(2)} minutos`);
   setTimeout(() => {
-    callback();
-    scheduleNextHour(callback);
-  }, delay);
+    funcao();
+    setInterval(funcao, 60 * 60 * 1000);
+  }, calcularTempoAteProximaHora());
 }
 
-scheduleNextHour(() => {
-  console.log("Iniciando execução...");
+executarNaHoraRedonda(() => {
+  console.log("Iniciando execução!");
   getSystemStats()
     .then(() => {
       console.log("Execução concluida com sucesso!");
