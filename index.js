@@ -19,7 +19,8 @@ export default async function getSystemStats() {
     .replaceAll("/", "-")
     .replaceAll(",", "");
   const [dia, mes, ano, hora] = dataString.split(/[- ]/);
-  const dataHoraParcial = `${ano}-${mes}-${dia} ${hora}`;
+  const dataHoraParcial = `${ano}-${mes}-${dia} ${hora} -03:00`;
+  console.log(dataHoraParcial);
 
   reports
     .create({
