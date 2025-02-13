@@ -12,15 +12,9 @@ export default async function getSystemStats() {
   const cpu = await si.currentLoad();
   const cpuUsagePercent = cpu.currentLoad.toFixed(2);
 
-  // Obter informações de data e hora
-  const date = new Date();
-  const dataString = date
-    .toLocaleString("pt-BR")
-    .replaceAll("/", "-")
-    .replaceAll(",", "");
-  const [dia, mes, ano, hora] = dataString.split(/[- ]/);
-  const dataHoraParcial = `${ano}-${mes}-${dia} ${hora} -03:00`;
-  console.log(dataHoraParcial);
+  const dataHoraBrasil = new Date().toLocaleString("sv-SE", {
+    timeZone: "America/Sao_Paulo",
+  });
 
   reports
     .create({
@@ -28,7 +22,7 @@ export default async function getSystemStats() {
       ramEmUso: usedMemory,
       porcentagemRam: usedMemoryPercent,
       porcentagemCpu: cpuUsagePercent,
-      dataHoraParcial: dataHoraParcial,
+      dataHoraParcial: dataHoraBrasil,
     })
     .then(() => {
       console.log("Informações do sistema enviadas com sucesso!");
