@@ -23,7 +23,7 @@ const reports = sequelize.define(
       type: DataTypes.DECIMAL,
     },
     dataHoraParcial: {
-      type: DataTypes.DATE,
+      type: DataTypes.STRING,
     },
   },
   {
