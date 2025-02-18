@@ -1,5 +1,5 @@
 import si from "systeminformation";
-import reports from "./models/report.js";
+import report from "./models/report.js";
 import "dotenv/config";
 
 export default async function getSystemStats() {
@@ -16,7 +16,7 @@ export default async function getSystemStats() {
     timeZone: "America/Sao_Paulo",
   });
 
-  reports
+  report
     .create({
       serverName: process.env.SERVER_NAME,
       ramEmUso: usedMemory,
